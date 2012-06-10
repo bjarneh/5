@@ -261,13 +261,8 @@ $(document).ready(function(){
 
     function paint(){
 
-        //paint background (entire canvas) black
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, w, h);
-        ctx.strokeStyle = "white";
-        ctx.strokeRect(0, 0, w, h);
-
-        // paint background stars (in all states)
+        // paint background and stars (in all states)
+        paint_background();
         paint_stars();
 
         switch( state ){
@@ -282,14 +277,7 @@ $(document).ready(function(){
                 paint_pause();
         };
 
-        // paint score
-        var score_text = "score: " + score;
-        ctx.fillStyle = "yellow";
-        ctx.fillText(score_text, 5, h-5);
-        if(hiscore > 0){
-            var hiscore_text = "hiscore: "+ hiscore;
-            ctx.fillText(hiscore_text, 5, 12);
-        }
+        paint_score();
     }
 
     function paint_pause(){
@@ -298,6 +286,23 @@ $(document).ready(function(){
         ctx.font      = "50px Arial";
         ctx.fillText("= paused =", 253, 221);
         ctx.font      = tmp;
+    }
+
+    //paint entire canvas black with a white outline
+    function paint_background(){
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, w, h);
+        ctx.strokeStyle = "white";
+        ctx.strokeRect(0, 0, w, h);
+
+    }
+
+    function paint_score(){
+        ctx.fillStyle = "yellow";
+        ctx.fillText("score: "+ score, 5, h-5);
+        if(hiscore > 0){
+            ctx.fillText("hiscore: "+hiscore, 5, 12);
+        }
     }
 
     function paint_menu(){
